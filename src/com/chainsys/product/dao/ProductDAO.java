@@ -18,5 +18,4 @@ public interface ProductDAO {
 
 	void delete(int id);
 
-	Product delete_date(String date);
 }

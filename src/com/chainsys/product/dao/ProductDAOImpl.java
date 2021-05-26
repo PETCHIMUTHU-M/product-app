@@ -106,28 +106,13 @@ public class ProductDAOImpl implements ProductDAO {
 	public void update_expire(Product updateproduct1) {
 		try {
 			pstmt = con.prepareStatement("update product_2597 set expiry_date=? where id=?");
-			pstmt.setDate(1,Date.valueOf(updateproduct1.getExpiryDate());
+			pstmt.setDate(1,Date.valueOf(updateproduct1.getExpiryDate()));
 			pstmt.setInt(2, updateproduct1.getId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-	}
-	@Override
-	public Product delete_date(String date) {
-		Product product = null;
-		try {
-			pstmt = con.prepareStatement("select * from product_2597 where date=?");
-			pstmt.setString(2, date);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				product = new Product(rs.getInt("id"), rs.getString("name"), rs.getDate("expiry_date").toLocalDate());
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return product;
 	}
 
 

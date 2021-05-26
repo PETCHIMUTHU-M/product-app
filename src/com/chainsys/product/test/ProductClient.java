@@ -84,20 +84,8 @@ public class ProductClient {
 
 			}
 			break;
-
-		case 7:
-			System.out.println("Deleting a Product ");
-			System.out.println("Enter the Product Expiry Date");
-			date = scanner.next();
-			try {
-				service.delete_date(date);
-				productSet = service.findAll();
-				System.out.println(productSet);
-			} catch (ProductNotFoundException e) {
-			}
-			break;
 		
-		case 8:
+		case 7:
 			System.out.println("Deleting a Product");
 			System.out.println("Enter the Product Id");
 			id = scanner.nextInt();
