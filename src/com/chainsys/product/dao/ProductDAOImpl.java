@@ -6,7 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.chainsys.product.model.Product;
@@ -17,6 +20,8 @@ public class ProductDAOImpl implements ProductDAO {
 	private static PreparedStatement pstmt;
 	private static ResultSet rs;
 	private static Set<Product> productSet;
+	private static List<String> namelist;
+	private static List<Integer> idlist;
 
 	public ProductDAOImpl() {
 		try {
@@ -66,6 +71,22 @@ public class ProductDAOImpl implements ProductDAO {
 		try {
 			pstmt = con.prepareStatement("select * from product_2597 where name=?");
 			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				product = new Product(rs.getInt("id"), rs.getString("name"), rs.getDate("expiry_date").toLocalDate());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return product;
+	}
+	
+	@Override
+	public Product findByDate(String date) {
+		Product product = null;
+		try {
+			pstmt = con.prepareStatement("select * from product_2597 where Expiry_date=?");
+			pstmt.setString(1, date);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				product = new Product(rs.getInt("id"), rs.getString("name"), rs.getDate("expiry_date").toLocalDate());
@@ -141,19 +162,56 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public Set<Product> findAllName() {
+	public void delete(LocalDate date) {
+		try {
+			pstmt = con.prepareStatement("delete product_2597 where Expiry_date=?");
+			pstmt.setDate(1, Date.valueOf(date));
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}		
+	
+
+	@Override
+	public List<String> findAllName() {
 		try {
 			pstmt = con.prepareStatement("select name from product_2597");
 			rs = pstmt.executeQuery();
-			productSet = new HashSet<>();
+			namelist = new ArrayList<>();
 			while (rs.next()) {
-				Product product = new Product(rs.getInt("id"), rs.getString("name"), rs.getDate("expiry_date").toLocalDate());
-				productSet.add(product);
+				 namelist.add(rs.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return productSet;
+		return namelist;
 	}
+
+	@Override
+	public List<Integer> findAllId() {
+		try {
+			pstmt = con.prepareStatement("select id from product_2597");
+			rs = pstmt.executeQuery();
+			idlist = new ArrayList<>();
+			while (rs.next()) {
+				 idlist.add(rs.getInt("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return idlist;
+	}
+
+	@Override
+	public Product findByName(LocalDate date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
 
 }

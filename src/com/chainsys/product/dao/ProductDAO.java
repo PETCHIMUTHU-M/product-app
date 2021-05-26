@@ -1,5 +1,7 @@
 package com.chainsys.product.dao;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import com.chainsys.product.exception.ProductNotFoundException;
@@ -22,6 +24,14 @@ public interface ProductDAO {
 
 	void delete(String name);
 
-	Set<Product> findAllName();
+	List<String> findAllName();
+
+	List<Integer> findAllId();
+
+	Product findByDate(String date);
+
+	Product findByName(LocalDate date);
+
+	void delete(LocalDate date);
 
 }
