@@ -23,4 +23,6 @@ public interface ProductService {
 
 	void delete(String name) throws ProductNotFoundException;
 
+	Set<Product> findAllName();
+
 }

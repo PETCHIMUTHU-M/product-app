@@ -89,4 +89,9 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
+	@Override
+	public Set<Product> findAllName() {
+		return dao.findAllName();
+	}
+
 }

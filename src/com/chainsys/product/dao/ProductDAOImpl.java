@@ -140,4 +140,20 @@ public class ProductDAOImpl implements ProductDAO {
 		
 	}
 
+	@Override
+	public Set<Product> findAllName() {
+		try {
+			pstmt = con.prepareStatement("select name from product_2597");
+			rs = pstmt.executeQuery();
+			productSet = new HashSet<>();
+			while (rs.next()) {
+				Product product = new Product(rs.getInt("id"), rs.getString("name"), rs.getDate("expiry_date").toLocalDate());
+				productSet.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return productSet;
+	}
+
 }

@@ -28,6 +28,13 @@ public class ProductClient {
 			productSet = service.findAll();
 			System.out.println(productSet);
 			break;
+			
+		case 9:
+			System.out.println("Find All Products Name");
+			productSet = service.findAllName();
+			System.out.println(productSet);
+			break;
+			
 		case 2:
 			System.out.println("Find the Product By Id");
 			System.out.println("Enter the Product Id");

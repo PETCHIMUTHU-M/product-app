@@ -7,15 +7,12 @@ public class Product {
 	private String name;
 	private LocalDate expiryDate;
 
-	public Product() {
-
-	}
-
 	public Product(int id, String name, LocalDate expiryDate) {
 		this.id = id;
 		this.name = name;
 		this.expiryDate = expiryDate;
 	}
+
 
 	public int getId() {
 		return id;
@@ -79,5 +76,6 @@ public class Product {
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", expiryDate=" + expiryDate + "]";
 	}
+	
 
 }
