@@ -18,6 +18,7 @@ public class ProductClient {
 		String date;
 		DateTimeFormatter dateFormat;
 		int id;
+		String name;
 		System.out.println("Enter the choice");
 		Scanner scanner = new Scanner(System.in);
 		int choice = scanner.nextInt();
@@ -38,6 +39,16 @@ public class ProductClient {
 			}
 			break;
 		case 3:
+			System.out.println("Find the Product By Name");
+			System.out.println("Enter the Product Name");
+			name= scanner.next();
+			try {
+				Product product = service.findByName(name);
+				System.out.println(product);
+			} catch (ProductNotFoundException e) {
+			}
+			break;
+		case 4:
 			System.out.println("Update the Product Name Based on the Id");
 			date = "06/05/2019";
 			dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -50,16 +61,43 @@ public class ProductClient {
 
 			}
 			break;
-		case 4:
+		case 5:
 			System.out.println("Adding a Product");
 			date = "06/05/2019";
 			dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-			Product newProduct = new Product(4, "Pencil", LocalDate.parse(date, dateFormat));
+			Product newProduct = new Product(4, "Curd", LocalDate.parse(date, dateFormat));
 			service.save(newProduct);
 			productSet = service.findAll();
 			System.out.println(productSet);
 			break;
-		case 5:
+			
+		case 6:
+			System.out.println("Update the Product Expiry date Based on the Id");
+			date = "01/01/2023";
+			dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+			Product updateProduct1 = new Product(3, "Milk", LocalDate.parse(date, dateFormat));
+			try {
+				service.update_expire(updateProduct1 );
+				productSet = service.findAll();
+				System.out.println(productSet);
+			} catch (ProductNotFoundException e) {
+
+			}
+			break;
+
+		case 7:
+			System.out.println("Deleting a Product ");
+			System.out.println("Enter the Product Expiry Date");
+			date = scanner.next();
+			try {
+				service.delete_date(date);
+				productSet = service.findAll();
+				System.out.println(productSet);
+			} catch (ProductNotFoundException e) {
+			}
+			break;
+		
+		case 8:
 			System.out.println("Deleting a Product");
 			System.out.println("Enter the Product Id");
 			id = scanner.nextInt();
@@ -69,6 +107,7 @@ public class ProductClient {
 				System.out.println(productSet);
 			} catch (ProductNotFoundException e) {
 			}
+			
 		default:
 			break;
 		}
