@@ -18,4 +18,6 @@ public interface ProductDAO {
 
 	void delete(int id);
 
+	void delete(String name);
+
 }

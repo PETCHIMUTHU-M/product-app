@@ -21,4 +21,6 @@ public interface ProductService {
 
 	void update_expire(Product updateProduct1)  throws ProductNotFoundException;
 
+	void delete(String name) throws ProductNotFoundException;
+
 }
